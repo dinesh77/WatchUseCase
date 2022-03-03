@@ -1,0 +1,92 @@
+
+public abstract class Watch{
+public String brandName, type;
+int price;
+
+public Watch(String brandName, int price){
+this.brandName=brandName;
+this.price=price;
+}
+
+public Watch(String brandName, int price, String type){
+this(brandName, price);
+this.type=type;
+}
+
+@Override
+public String toString(){
+String n="Brand = "+this.brandName+"\t";
+String p="Price = "+this.price+"\t";
+String t="Type = "+(this.type!=null?this.type:"Watch type not provided");
+return "Watch Details : "+n+p+t+"\n";
+}
+
+public abstract void displayFeatures();
+}
+
+public abstract void displayFeatures();
+}
+class Timex extends Watch{
+public Timex(String brandName, int price){
+super(brandName, price);
+}
+
+public Timex(String brandName, int price, String type){
+this(brandName, price);
+super.type=type;
+}
+
+@Override
+public String toString(){
+return super.toString()+"One of the good brand";
+}
+
+@Override
+public void displayFeatures(){
+System.out.println("Leather strap and has backlight ");
+}
+}
+class Fastrack extends Watch{
+public Fastrack(String brandName, int price){
+super(brandName, price);
+}
+
+public Fastrack(String brandName, int price, String type){
+this(brandName, price);
+super.type=type;
+}
+
+@Override
+public void displayFeatures(){
+System.out.println("water proof");
+}
+}
+class WatchShop{
+public static void getWatch(String watchBrand){
+Watch w=null;
+if(watchBrand.equalsIgnoreCase("Timex")){
+w = new Timex(watchBrand, 5000, "Digital Watch");
+}else if(watchBrand.equalsIgnoreCase("Fastrack")){
+w = new Fastrack(watchBrand, 4000, "Analog Watch");
+}else if(watchBrand.equalsIgnoreCase("Titan")){
+w = new Watch(watchBrand, 3000, "Analog Watch"){
+@Override
+public void displayFeatures(){
+System.out.println("Metal Strap");
+}
+};
+}
+if(w!=null){
+System.out.println(w+" is available, please take a look");
+w.displayFeatures();
+}else System.out.println(watchBrand+" is not available");
+}
+}
+class Customer{
+public static void main(String[] abc){
+WatchShop.getWatch("Timex");
+WatchShop.getWatch("fastrack");
+WatchShop.getWatch("Titan");
+WatchShop.getWatch("Fossil");
+}
+}
